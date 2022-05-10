@@ -1,0 +1,332 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-05-03T19:47:31.014Z",
+  "__export_source": "insomnia.desktop.app:v2022.2.1",
+  "resources": [
+    {
+      "_id": "req_8af9315f5be3464c82baf20bed0814bc",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650574026302,
+      "created": 1650574026302,
+      "url": "{{ base_url }}/users/:uid",
+      "name": "update user",
+      "description": "Update user info",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"string\",\n  \"fullName\": \"string\",\n  \"id\": \"string\",\n  \"password\": \"string\",\n  \"role\": \"string\",\n  \"username\": \"string\"\n}"
+      },
+      "parameters": [
+        {
+          "name": "uid",
+          "disabled": false,
+          "value": "string",
+          "id": "pair_7eb4ae22dd144e6591d75d7ef12fb44e"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json",
+          "id": "pair_6eca958653f248f79496d80571615914"
+        },
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ api_key }}",
+          "id": "pair_0ec17f442edf406db59b6f7ac3d542c1"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 2300,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "parentId": null,
+      "modified": 1650571689458,
+      "created": 1650571689458,
+      "name": "go-api-template.yaml",
+      "description": "",
+      "scope": "design",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_f733e1a04ec5405596809be30bc7e463",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650574026304,
+      "created": 1650574026304,
+      "url": "{{ base_url }}/ping",
+      "name": "Ping the server",
+      "description": "Check api is active",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ api_key }}",
+          "id": "pair_8dad32fea30c469bb550e15f9501ca3e"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1100,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d03374bc23894fa2871c66ba73fc2a95",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650574026305,
+      "created": 1650574026305,
+      "url": "{{ _.base_url }}/auth/login",
+      "name": "login to get the authentication bearer token",
+      "description": "Get your user's token to acess users only protected routes",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"identity\":\"admin\",\n\t\"password\": \"SuperSecurePassword\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_f2ff76c8e0854830954905fa9bd0d6c8"
+        },
+        {
+          "id": "pair_2bc35b6dbdf14a53a35a12d7906534c6",
+          "name": "swaggerize",
+          "value": "{% swaggerOptions 'json', 'Login with credentials to get your acess token', 'tags', 'object containing token or unauthorised', true, '' %}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 800,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_62cb391433a24af688397025f0667cd1",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650579674723,
+      "created": 1650579674723,
+      "url": "{{ base_url }}/users/",
+      "name": "Register endpoint",
+      "description": "Register a new user",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"admin@zark0.com\",\n  \"fullName\": \"zark0 besto admin\",\n  \"password\": \"SuperSecurePassword\",\n  \"username\": \"admin\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json",
+          "id": "pair_e29aab96a2424cbaac0430bf00ac9128"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 1600,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d1ef9a2ec484440e8cf60ffed8730a8b",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650580217346,
+      "created": 1650580217346,
+      "url": "{{ base_url }}/users/:uid",
+      "name": "Retrieve user data",
+      "description": "Check api is active",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "name": "uid",
+          "disabled": false,
+          "value": "string",
+          "id": "pair_776d848ff34e44d38baa78ea22767975"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ api_key }}",
+          "id": "pair_f9231c83152d419485095f1a502c6d4b"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 2100,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_e073b0490f7046cb88076844e7a34d69",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650581018095,
+      "created": 1650581018095,
+      "url": "{{ base_url }}/users/:uid",
+      "name": "delete user",
+      "description": "delete user completely",
+      "method": "DELETE",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"password\": \"string\"\n}"
+      },
+      "parameters": [
+        {
+          "name": "uid",
+          "disabled": false,
+          "value": "string"
+        }
+      ],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ api_key }}"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 700,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_d4f4460d4c5a40f7b6a62e90aef34ea2",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650581018097,
+      "created": 1650581018097,
+      "url": "{{ base_url }}/docs",
+      "name": "API docs",
+      "description": "get the API docs, in json, yaml, or view them using redoc in /docs/spec.html",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ api_key }}",
+          "id": "pair_f54594fe05664424a5657fc12f2977ab"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 300,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_73ab391158a5a67608f81ca3e1e7032f6c2f6c0f",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650571689462,
+      "created": 1650571689462,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "{{ scheme }}://{{ host }}{{ base_path }}"
+      },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1650571689462,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_73ab391158a5a67608f81ca3e1e7032f6c2f6c0f",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650571689463,
+      "created": 1650571689463,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_8aef25a3a2e4499fb9c5d9193a0949bb",
+      "parentId": "wrk_c28fba86c9d4408aa14e4e594852eaae",
+      "modified": 1650571689459,
+      "created": 1650571689459,
+      "fileName": "go-api-template",
+      "contents": "{\n    \"swagger\": \"2.0\",\n    \"info\": {\n        \"description\": \"Description for what is this security definition being used\",\n        \"title\": \"GO API template\",\n        \"termsOfService\": \"http://swagger.io/terms/\",\n        \"contact\": {\n            \"name\": \"API Support\"\n        },\n        \"license\": {\n            \"name\": \"GNU GPLv3\",\n            \"url\": \"https://www.gnu.org/licenses/gpl-3.0.html\"\n        },\n        \"version\": \"1.0\"\n    },\n    \"host\": \"localhost:3000\",\n    \"basePath\": \"/v1\",\n    \"paths\": {\n        \"/auth/login\": {\n            \"get\": {\n                \"description\": \"Get your user's token to acess users only protected routes\",\n                \"consumes\": [\n                    \"application/json\"\n                ],\n                \"produces\": [\n                    \"application/json\"\n                ],\n                \"summary\": \"login to get the authentication bearer token\",\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"OK\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"400\": {\n                        \"description\": \"Bad Request\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"401\": {\n                        \"description\": \"Unauthorized\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    }\n                }\n            }\n        },\n        \"/docs\": {\n            \"get\": {\n                \"security\": [\n                    {\n                        \"BearerAuth\": []\n                    }\n                ],\n                \"description\": \"get the API docs, in json, yaml, or view them using redoc in /docs/spec.html\",\n                \"consumes\": [\n                    \"application/json\"\n                ],\n                \"produces\": [\n                    \"application/json\"\n                ],\n                \"summary\": \"API docs\",\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"OK\",\n                        \"schema\": {\n                            \"type\": \"string\"\n                        }\n                    },\n                    \"401\": {\n                        \"description\": \"Unauthorized\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    }\n                }\n            }\n        },\n        \"/ping\": {\n            \"get\": {\n                \"security\": [\n                    {\n                        \"BearerAuth\": []\n                    }\n                ],\n                \"description\": \"Check api is active\",\n                \"consumes\": [\n                    \"application/json\"\n                ],\n                \"produces\": [\n                    \"application/json\"\n                ],\n                \"summary\": \"Ping the server\",\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"OK\",\n                        \"schema\": {\n                            \"type\": \"string\"\n                        }\n                    },\n                    \"401\": {\n                        \"description\": \"Unauthorized\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    }\n                }\n            }\n        },\n        \"/users/\": {\n            \"post\": {\n                \"description\": \"Register a new user\",\n                \"consumes\": [\n                    \"application/json\"\n                ],\n                \"produces\": [\n                    \"application/json\"\n                ],\n                \"summary\": \"Register endpoint\",\n                \"parameters\": [\n                    {\n                        \"description\": \"initial data for the user\",\n                        \"name\": \"registerData\",\n                        \"in\": \"body\",\n                        \"required\": true,\n                        \"schema\": {\n                            \"$ref\": \"#/definitions/models.User\"\n                        }\n                    }\n                ],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"OK\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"401\": {\n                        \"description\": \"Unauthorized\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"422\": {\n                        \"description\": \"Unprocessable Entity\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"500\": {\n                        \"description\": \"Internal Server Error\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    }\n                }\n            }\n        },\n        \"/users/:uid\": {\n            \"get\": {\n                \"security\": [\n                    {\n                        \"BearerAuth\": []\n                    }\n                ],\n                \"description\": \"Check api is active\",\n                \"consumes\": [\n                    \"application/json\"\n                ],\n                \"produces\": [\n                    \"application/json\"\n                ],\n                \"summary\": \"Retrieve user data\",\n                \"parameters\": [\n                    {\n                        \"type\": \"string\",\n                        \"description\": \"uid string\",\n                        \"name\": \"uid\",\n                        \"in\": \"query\",\n                        \"required\": true\n                    }\n                ],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"OK\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"401\": {\n                        \"description\": \"Unauthorized\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"404\": {\n                        \"description\": \"Not Found\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"500\": {\n                        \"description\": \"Internal Server Error\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    }\n                }\n            },\n            \"delete\": {\n                \"security\": [\n                    {\n                        \"BearerAuth\": []\n                    }\n                ],\n                \"description\": \"delete user completely\",\n                \"consumes\": [\n                    \"application/json\"\n                ],\n                \"produces\": [\n                    \"application/json\"\n                ],\n                \"summary\": \"delete user\",\n                \"parameters\": [\n                    {\n                        \"description\": \"password of the user to delete, not required if user is admin\",\n                        \"name\": \"password\",\n                        \"in\": \"body\",\n                        \"schema\": {\n                            \"$ref\": \"#/definitions/users.PasswordInput\"\n                        }\n                    },\n                    {\n                        \"type\": \"string\",\n                        \"description\": \"User ID\",\n                        \"name\": \"uid\",\n                        \"in\": \"query\",\n                        \"required\": true\n                    }\n                ],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"OK\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"401\": {\n                        \"description\": \"Unauthorized\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"422\": {\n                        \"description\": \"Unprocessable Entity\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"500\": {\n                        \"description\": \"Internal Server Error\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    }\n                }\n            },\n            \"patch\": {\n                \"security\": [\n                    {\n                        \"BearerAuth\": []\n                    }\n                ],\n                \"description\": \"Update user info\",\n                \"consumes\": [\n                    \"application/json\"\n                ],\n                \"produces\": [\n                    \"application/json\"\n                ],\n                \"summary\": \"update user\",\n                \"parameters\": [\n                    {\n                        \"description\": \"data to update, currently only allows to update the fullName field\",\n                        \"name\": \"updateUserData\",\n                        \"in\": \"body\",\n                        \"required\": true,\n                        \"schema\": {\n                            \"$ref\": \"#/definitions/models.User\"\n                        }\n                    },\n                    {\n                        \"type\": \"string\",\n                        \"description\": \"User ID\",\n                        \"name\": \"uid\",\n                        \"in\": \"query\",\n                        \"required\": true\n                    }\n                ],\n                \"responses\": {\n                    \"200\": {\n                        \"description\": \"OK\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"401\": {\n                        \"description\": \"Unauthorized\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"422\": {\n                        \"description\": \"Unprocessable Entity\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    },\n                    \"500\": {\n                        \"description\": \"Internal Server Error\",\n                        \"schema\": {\n                            \"type\": \"object\"\n                        }\n                    }\n                }\n            }\n        }\n    },\n    \"definitions\": {\n        \"models.User\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"email\": {\n                    \"type\": \"string\"\n                },\n                \"fullName\": {\n                    \"type\": \"string\"\n                },\n                \"id\": {\n                    \"type\": \"string\"\n                },\n                \"password\": {\n                    \"type\": \"string\"\n                },\n                \"role\": {\n                    \"type\": \"string\"\n                },\n                \"username\": {\n                    \"type\": \"string\"\n                }\n            }\n        },\n        \"users.PasswordInput\": {\n            \"type\": \"object\",\n            \"properties\": {\n                \"password\": {\n                    \"type\": \"string\"\n                }\n            }\n        }\n    },\n    \"securityDefinitions\": {\n        \"BearerAuth\": {\n            \"type\": \"apiKey\",\n            \"name\": \"Authorization\",\n            \"in\": \"header\"\n        }\n    }\n}",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_env_73ab391158a5a67608f81ca3e1e7032f6c2f6c0f_sub",
+      "parentId": "env_73ab391158a5a67608f81ca3e1e7032f6c2f6c0f",
+      "modified": 1650573471154,
+      "created": 1650573471154,
+      "name": "local env",
+      "data": {
+        "base_path": "/v1",
+        "scheme": "http",
+        "host": "localhost:3000"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_path",
+          "scheme",
+          "host"
+        ]
+      },
+      "color": "#00ddfa",
+      "isPrivate": false,
+      "metaSortKey": 1650573471155,
+      "_type": "environment"
+    }
+  ]
+}

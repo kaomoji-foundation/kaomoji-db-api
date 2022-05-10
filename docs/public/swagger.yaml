@@ -1,0 +1,379 @@
+openapi: 3.1.0
+
+info:
+  contact:
+    name: API Support
+  description: 
+    GO API template made using common tecnologies.
+    With user management demonstration built in
+  license:
+    name: GNU GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.html
+  termsOfService: "not available yet"
+  title: GO API template
+  version: "1.0"
+
+servers:
+  - url: https://api.kaomoji-db.com:{port}/{basePath}
+    description: The production API server
+    variables:
+      port:
+        enum:
+          - "80"
+          - "443"
+        default: "443"
+      basePath:
+        enum:
+          - v1
+          - prev
+        # open meaning there is the opportunity to use special base paths as assigned by the provider, default is `v1`
+        default: v1
+  - url: http://localhost:{port}/{basePath}
+    description: The local development API
+    variables:
+      port:
+        enum:
+          - '3000'
+          - '443'
+        default: '3000'
+      basePath:
+        enum:
+          - 'v1'
+          - 'prev'
+        default: 'v1'
+
+components:
+  securitySchemes:
+    bearer:
+        type: "http"
+        scheme: "bearer"
+        bearerFormat: "JWT"
+  parameters:
+    uid: 
+      description: User ID or username
+      in: path
+      name: uid
+      required: true
+      schema:
+        type: string
+      
+  responses:
+    "500":
+      description: Internal Server Error
+      schema:
+        $ref: "#/components/schemas/error"
+    "400":
+      description: Bad Request
+      schema:
+        $ref: "#/components/schemas/error"
+    "401":
+      description: Unauthorized
+      schema:
+        $ref: "#/components/schemas/error"
+    "404":
+      description: Not Found
+      schema:
+        $ref: "#/components/schemas/error"
+    "422":
+      description: Unprocessable Entity
+      schema:
+        $ref: "#/components/schemas/error"
+
+  schemas:
+    token.response:
+      type: object
+      properties:
+        status:
+          type: string
+          description: status string.
+        message:
+          type: string
+          description: Specific description of the action
+        token:
+          type: string
+          description: Raw bearer token in JWT format
+
+    user:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+          description: user's username, will be used for login
+        password:
+          type: string
+          description: user's password, will be used for login
+        email:
+          type: string
+          description: Can be used for login, contact and many other things
+        name:
+          type: string
+          description: this will only be used for contacting
+    error:
+      type: object
+      properties:
+        status:
+          type: string
+          description: status string, 'sucess' or 'error'
+        message:
+          type: string
+          description: Specific description of the error
+        data:
+          type: string
+          description: Data related to the error
+
+paths:
+  
+  /docs:
+    get:
+      summary: API docs
+      description: get theese API docs, in yaml, or view them using redoc in /docs/spec.html
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+
+  /ping:
+    get:
+      summary: Ping
+      description: Check api is active
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "401":
+          $ref: "#/components/responses/401"
+      security:
+        - bearer: []      
+
+  /auth/login/{uid}:
+    get:
+      summary: Login, Get bearer token
+      description: Get your user's authentication bearer token to acess users only protected routes
+      parameters:
+        - $ref: "#/components/parameters/uid"
+      requestBody:
+        description: password json field
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - password
+              properties:
+                password:
+                  type: string
+                  description: user's password
+
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/components/schemas/token.response"
+        "400":
+          $ref: "#/components/responses/400"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /auth/renew:
+    get:
+      summary: Renew bearer token
+      description: Gives an authentication token for the same user of the token used to acess, blocks the old one
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/components/schemas/token.response"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "500":
+          $ref: "#/components/responses/500"
+      security:
+        - bearer: []
+
+  /users/:
+    post:
+      summary: Register new user
+      description: Register a new user
+      requestBody:
+        description: user's data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  description: user's username, will be used for login
+                password:
+                  type: string
+                  description: user's password, will be used for login
+                email:
+                  type: string
+                  description: Can be used for login, contact and many other things
+                name:
+                  type: string
+                  description: this will only be used for contacting
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "401":
+          $ref: "#/components/responses/401"
+        "422":
+          $ref: "#/components/responses/422"
+        "500":
+          $ref: "#/components/responses/500"
+    get:
+      summary: List users
+      description: Get a single user's data
+      parameters:
+        - name: o
+          description: Ressults Offset
+          in: query
+          required: false
+          allowEmptyValue: true
+          example: '0'
+          schema:
+            o: 
+              type: number
+              default: '0'
+        - name: l
+          description: Ressults Limmit
+          in: query
+          required: false
+          allowEmptyValue: true
+          example: 10
+          schema:
+            o: 
+              type: number
+              default: 10
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "401":
+          $ref: "#/components/responses/401"
+        "404":
+          $ref: "#/components/responses/404"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /users/{uid}:
+    get:
+      summary: Retrieve user data
+      description: 
+        Get a single user's data, will retrieve different data.
+        Depending on the token's user
+      consumes:
+      - application/json
+      parameters:
+      - description: uid string or username
+        schema: string
+        in: query
+        name: uid
+        required: true
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/components/schemas/user"
+        "401":
+          $ref: "#/components/responses/401"
+        "404":
+          $ref: "#/components/responses/404"
+        "500":
+          $ref: "#/components/responses/500"
+      security:
+      - bearer: []
+    patch:
+      consumes:
+      - application/json
+      description: Update user info
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/user"
+      parameters:
+      - $ref: "#/components/parameters/uid"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "401":
+          $ref: "#/components/responses/401"
+        "422":
+          $ref: "#/components/responses/422"
+        "404":
+          $ref: "#/components/responses/404"
+        "500":
+          $ref: "#/components/responses/500"
+
+      security:
+      - bearer: []
+      summary: update user
+    delete:
+      summary: Delete user
+      description: delete user completely
+      consumes:
+      - application/json
+      parameters:
+      - $ref: "#/components/parameters/uid"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "401":
+          $ref: "#/components/responses/401"
+        "422":
+          $ref: "#/components/responses/422"
+        "500":
+          $ref: "#/components/responses/500"
+
+      security:
+        - bearer: []
