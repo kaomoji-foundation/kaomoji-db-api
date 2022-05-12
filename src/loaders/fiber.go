@@ -29,9 +29,9 @@ func LoadFiber() *fiber.App {
 		Expiration: 30,
 		Max:        20,
 	}))
-	//* here you mount the routes for the apps in a certain bas path like: /api/v1
-	router := app.Group("/v1")  // this is the base route for all endpoints
-	routes.SetupRoutes(&router) // this Mounts all the app routes into router
+	//* here you mount the routes for the apps in a certain bas path like: /api/alpha
+	router := app.Group("/alpha") // this is the base route for all endpoints
+	routes.SetupRoutes(&router)   // this Mounts all the app routes into router
 
 	return app
 }
