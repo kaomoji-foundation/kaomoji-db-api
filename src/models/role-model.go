@@ -24,10 +24,12 @@ type Role struct {
 
 // Theese permissons are checked every time a user wants to make an operation restricted to certain roles
 type Permissons struct { //? shuld have a FullAcess flag?
-	ReadUsers  bool `bson:"readUsers" json:"readUsers"`
-	UsersAdmin bool `bson:"usersAdmin" json:"usersAdmin"`
-	ReadRoles  bool `bson:"readRoles" json:"readRoles"`
-	RolesAdmin bool `bson:"rolesAdmin" json:"rolesAdmin"`
+	ReadUsers         bool `bson:"readUsers" json:"readUsers"`
+	UsersAdmin        bool `bson:"usersAdmin" json:"usersAdmin"`
+	ReadRoles         bool `bson:"readRoles" json:"readRoles"`
+	RolesAdmin        bool `bson:"rolesAdmin" json:"rolesAdmin"`
+	KaomojisAdmin     bool `bson:"kaomojisAdmin" json:"kaomojisAdmin"`
+	KaomojisModerator bool `bson:"kaomojisModerator" json:"kaomojisModerator"`
 }
 
 //? The plurificated interfaces of the models are probably useless AAAND anoying
