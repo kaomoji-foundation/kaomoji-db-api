@@ -200,9 +200,7 @@ func (u User) RoleData() (Role, error) {
 
 // Sets the role id by searching it via the name stored on user.Role
 func (u *User) SetRole() error {
-	filter := bson.D{
-		{"role", u.Role},
-	}
+	filter := bson.M{"role": u.Role}
 	res := RolesCollection.FindOne(context.Background(), filter)
 	if err := res.Err(); err != nil {
 		return err
