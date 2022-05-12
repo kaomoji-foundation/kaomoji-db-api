@@ -105,7 +105,7 @@ func UpdateKaomoji(c *fiber.Ctx) error {
 	}
 
 	// kaomoji string validation
-	if kui.String != nil || len(kui.String) > 0 || !reflect.DeepEqual(kaomoji.String, kui.String) {
+	if kui.String != "" || len(kui.String) > 0 || !reflect.DeepEqual(kaomoji.String, kui.String) {
 		kaomoji.String = kui.String
 
 		unique, err := kaomoji.CheckUnique()
@@ -138,7 +138,7 @@ func UpdateKaomoji(c *fiber.Ctx) error {
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"status":  "error",
-			"message": "failed to delete the kaomoji",
+			"message": "failed to update the kaomoji",
 			"data":    nil,
 		})
 	}

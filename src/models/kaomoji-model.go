@@ -16,10 +16,10 @@ import (
 
 type Kaomoji struct {
 	ID         primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	String     []rune             `bson:"string,omitempty" json:"string"`
+	String     string             `bson:"string" json:"string"`
 	Desciption string             `bson:"description,omitempty" json:"description"`
-	Categories []string           `bson:"categories,omitempty" json:"categories"`
-	Revisions  []IssueMinimal     `bson:"revisions,omitempty" json:"revisions"`
+	Categories []string           `bson:"categories" json:"categories"`
+	Revisions  []IssueMinimal     `bson:"revisions" json:"revisions"`
 }
 
 //? The plurificated interfaces of the models are probably useless AAAND anoying
@@ -32,9 +32,9 @@ type Kaomojis interface {
 // basic reduced kaomojidata viewable by anyone to use on kaomojis listings
 type KaomojiMinimal struct {
 	ID         primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	String     []rune             `bson:"string,omitempty" json:"string"`
+	String     string             `bson:"string" json:"string"`
 	Desciption string             `bson:"description,omitempty" json:"description"`
-	Categories []string           `bson:"categories,omitempty" json:"categories"`
+	Categories []string           `bson:"categories" json:"categories"`
 }
 
 var KaomojisCollection *mongo.Collection
@@ -116,8 +116,8 @@ func (k *Kaomoji) Fill(identificator string, id, _string bool) error {
 	if err := res.Err(); err != nil {
 		return err
 	}
-	res.Decode(k)
-	return nil
+	err := res.Decode(k)
+	return err
 }
 
 // Fills the kaomoji checking  id, string or email, multiple of them can be used at the same time
@@ -169,7 +169,7 @@ func (k Kaomoji) CheckUnique() (bool, error) {
 		"string": k.String,
 	}
 
-	count, err := UsersCollection.CountDocuments(context.Background(), filter)
+	count, err := KaomojisCollection.CountDocuments(context.Background(), filter)
 
 	return count == 0, err
 }
@@ -238,7 +238,7 @@ str string to find subject in
 subjet string to be found within str in a fuzy way
 Fuzyness defaults to 2, so at most 2 operations[insertions, deletions or substitutions] on the trimed string
 */
-func fuzzyStringIsIn(stri, subject []rune, fuzyness ...int) bool {
+func fuzzyStringIsIn(stri, subject string, fuzyness ...int) bool {
 
 	return false
 }

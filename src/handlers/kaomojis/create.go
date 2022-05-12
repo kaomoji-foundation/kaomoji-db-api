@@ -8,7 +8,6 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	jwt "github.com/golang-jwt/jwt/v4"
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -24,7 +23,7 @@ import (
 // @Failure      500  {object}  interface{}
 // @Router       /kaomojis/ [post]
 func CreateKaomoji(c *fiber.Ctx) error {
-	return c.SendStatus(fiber.StatusNotImplemented)
+	// return c.SendStatus(fiber.StatusNotImplemented)
 
 	// Token of the editor's user
 	token := c.Locals("user").(*jwt.Token)
@@ -76,6 +75,8 @@ func CreateKaomoji(c *fiber.Ctx) error {
 		})
 	}
 
+	kaomoji.ID = primitive.NilObjectID
+
 	// kaomoji string validation
 	unique, err := kaomoji.CheckUnique()
 	if err != nil {
@@ -112,21 +113,27 @@ func CreateKaomoji(c *fiber.Ctx) error {
 		},
 	}
 
-	filter := bson.M{"_id": kaomoji.ID}
-	update := bson.M{"$set": kaomoji}
-
-	_, err = models.KaomojisCollection.UpdateOne(context.Background(), filter, update)
+	res, err := models.KaomojisCollection.InsertOne(context.Background(), kaomoji)
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{
 			"status":  "error",
-			"message": "failed to delete the kaomoji",
+			"message": "failed to create the kaomoji",
+			"data":    nil,
+		})
+	}
+
+	err = kaomoji.Fill(res.InsertedID.(primitive.ObjectID).Hex(), true, false)
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{
+			"status":  "error",
+			"message": "failed to retrieve the data of the created resource 'kaomoji', with id: " + res.InsertedID.(primitive.ObjectID).Hex(),
 			"data":    nil,
 		})
 	}
 
 	return c.JSON(fiber.Map{
 		"status":  "success",
-		"message": "Kaomoji successfully updated",
+		"message": "Kaomoji successfully created",
 		"data":    kaomoji,
 	})
 }
