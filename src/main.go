@@ -27,12 +27,14 @@ import (
 func Start() {
 	cfg.Load(true) // force load, so it also attempts to load .ENV file
 
-	//Open Telemetry setup
-	ls := launcher.ConfigureOpentelemetry(
-		launcher.WithServiceName("Go-API-Template"),
-		launcher.WithAccessToken(cfg.Config.OpenTel.LightStepKey),
-	)
-	defer ls.Shutdown()
+	//Open Telemetry setup (optional)
+	if cfg.Config.OpenTel.LightStepKey != "" {
+		ls := launcher.ConfigureOpentelemetry(
+			launcher.WithServiceName("Go-API-Template"),
+			launcher.WithAccessToken(cfg.Config.OpenTel.LightStepKey),
+		)
+		defer ls.Shutdown()
+	}
 	// END Open Telemetry setup
 
 	serverPort := cfg.Config.Service.Port

@@ -1,0 +1,379 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-05-12T10:45:34.836Z",
+  "__export_source": "insomnia.desktop.app:v2022.3.0",
+  "resources": [
+    {
+      "_id": "req_6accaf1051924aee8cb007c8c994863c",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618070,
+      "created": 1652273618070,
+      "url": "{{ base_url }}/users/UwU",
+      "name": "update user",
+      "description": "Update user info",
+      "method": "PATCH",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"\",\n  \"name\": \"\",\n  \"id\": \"\",\n  \"password\": \"\",\n  \"role\": \"role\",\n  \"username\": \"\"\n\t\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json",
+          "id": "pair_6eca958653f248f79496d80571615914"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_d03374bc23894fa2871c66ba73fc2a95', 'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": 500,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "parentId": null,
+      "modified": 1652273618065,
+      "created": 1652273618065,
+      "name": "kaomoji-db-api",
+      "description": "",
+      "scope": "design",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_0a0c432465a14d259b0d8b3e0416fa3b",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618071,
+      "created": 1652273618071,
+      "url": "{{ base_url }}/ping",
+      "name": "Ping the server",
+      "description": "Check api is active",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_d03374bc23894fa2871c66ba73fc2a95', 'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": 200,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_552e2a64517c4d1b9f1d4915cfac6807",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618071,
+      "created": 1652273618071,
+      "url": "{{ _.base_url }}/auth/login",
+      "name": "Login (bearer token)",
+      "description": "Get your user's token to acess users only protected routes",
+      "method": "GET",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n\t\"identity\":\"root\",\n\t\"password\": \"SuperSecurePassword\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_f2ff76c8e0854830954905fa9bd0d6c8"
+        },
+        {
+          "id": "pair_2bc35b6dbdf14a53a35a12d7906534c6",
+          "name": "swaggerize",
+          "value": "{% swaggerOptions 'json', 'Login with credentials to get your acess token', 'tags', 'object containing token or unauthorised', true, '' %}",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 100,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_409da1107ca247d19d4dfd3a510b023a",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618072,
+      "created": 1652273618072,
+      "url": "{{ base_url }}/users/",
+      "name": "Register endpoint",
+      "description": "Register a new user",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"\",\n  \"name\": \"root\",\n  \"password\": \"SuperSecurePassword\",\n  \"username\": \"root\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "disabled": false,
+          "value": "application/json",
+          "id": "pair_e29aab96a2424cbaac0430bf00ac9128"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 400,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6269c271b09e41c6b02dff01d819d018",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618073,
+      "created": 1652273618073,
+      "url": "{{ base_url }}/users/root",
+      "name": "Retrieve user data",
+      "description": "Check api is active",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_d03374bc23894fa2871c66ba73fc2a95', 'b64::JC50b2tlbg==::46b', 'never', 60 %}",
+        "disabled": true
+      },
+      "metaSortKey": 300,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_7c72a8bb9dad48e8a74e21aa6d9032d0",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618073,
+      "created": 1652273618073,
+      "url": "{{ base_url }}/users/uwu",
+      "name": "delete user",
+      "description": "delete user completely",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_d03374bc23894fa2871c66ba73fc2a95', 'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": 600,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_bbb67188b84a498dbc243c81811b4e6f",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618074,
+      "created": 1652273618074,
+      "url": "{{ base_url }}/docs",
+      "name": "API docs",
+      "description": "get the API docs, in json, yaml, or view them using redoc in /docs/spec.html",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "disabled": false,
+          "value": "{{ api_key }}",
+          "id": "pair_f54594fe05664424a5657fc12f2977ab"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": 0,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_719a53646c3749b396a53a9be8766609",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618075,
+      "created": 1652273618075,
+      "url": "{{ base_url }}/users/",
+      "name": "Retrieve multiple users data",
+      "description": "Check api is active",
+      "method": "GET",
+      "body": {},
+      "parameters": [
+        {
+          "id": "pair_bdb29fcb9b0e4dfca457aa6c83faf905",
+          "name": "o",
+          "value": "0",
+          "description": ""
+        },
+        {
+          "id": "pair_1e2a20d68214436494c8ae3572a9222a",
+          "name": "l",
+          "value": "5",
+          "description": ""
+        }
+      ],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_d03374bc23894fa2871c66ba73fc2a95', 'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": 350,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_eb69c59624df4f2f9f57de0362572130",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618075,
+      "created": 1652273618075,
+      "url": "{{ base_url }}/auth/renew",
+      "name": "Renew token",
+      "description": "Check api is active",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {
+        "type": "bearer",
+        "token": "{% response 'body', 'req_d03374bc23894fa2871c66ba73fc2a95', 'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+      },
+      "metaSortKey": 150,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_c3e808d560d4402fa4a6a34b2ae1d974",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618065,
+      "created": 1652273618065,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "{{ scheme }}://{{ host }}{{ base_path }}"
+      },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1650571689462,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_84fa9ccba3be42aa8828ff12253d0711",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618068,
+      "created": 1652273618068,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_776eb34b43bc416bbceaddc1eca1679e",
+      "parentId": "wrk_9e4f7a590d6b44f6ae4d90e2905dd77f",
+      "modified": 1652273618069,
+      "created": 1652273618069,
+      "fileName": "kaomoji-db-api",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    },
+    {
+      "_id": "env_80d364dc07da4ad49dd12d2cbb22b553",
+      "parentId": "env_c3e808d560d4402fa4a6a34b2ae1d974",
+      "modified": 1652273618065,
+      "created": 1652273618065,
+      "name": "local env",
+      "data": {
+        "base_path": "/v1",
+        "scheme": "http",
+        "host": "localhost:3000"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_path",
+          "scheme",
+          "host"
+        ]
+      },
+      "color": "#00ddfa",
+      "isPrivate": false,
+      "metaSortKey": 1650573471155,
+      "_type": "environment"
+    },
+    {
+      "_id": "env_bf8c269223204d7087cada1d91eecdba",
+      "parentId": "env_c3e808d560d4402fa4a6a34b2ae1d974",
+      "modified": 1652273618066,
+      "created": 1652273618066,
+      "name": "production-api",
+      "data": {
+        "base_path": "/v1",
+        "scheme": "https",
+        "host": "kaomoji-db-api.herokuapp.com"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "base_path",
+          "scheme",
+          "host"
+        ]
+      },
+      "color": "#c800ff",
+      "isPrivate": false,
+      "metaSortKey": 1652129745762,
+      "_type": "environment"
+    }
+  ]
+}
