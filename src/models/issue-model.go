@@ -31,13 +31,15 @@ type Issue struct {
 
 // basic reduced issuedata viewable by anyone to use on issues listings
 type IssueMinimal struct {
-	ID        primitive.ObjectID `bson:"_id,omitempty" json:"id"`
-	Author    UserMinimal        `bson:"author,omitempty" json:"author"`
-	Reviewer  UserMinimal        `bson:"reviewer,omitempty" json:"reviewer"`
-	Title     string             `bson:"title" json:"title"`
-	Status    string             `bson:"status" json:"status"`
-	Operation string             `bson:"operation" json:"operation"`
-	Kaomoji   KaomojiMinimal     `bson:"kaomoji" json:"kaomoji"`
+	ID       primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	Author   UserMinimal        `bson:"author,omitempty" json:"author"`
+	Reviewer UserMinimal        `bson:"reviewer,omitempty" json:"reviewer"`
+	Title    string             `bson:"title" json:"title"`
+	// Status: "acepted", "closed", "on review", "assigned", "pending"
+	Status string `bson:"status" json:"status"`
+	// Operation: "create", "modify", "delete", "report"
+	Operation string         `bson:"operation" json:"operation"`
+	Kaomoji   KaomojiMinimal `bson:"kaomoji" json:"kaomoji"`
 }
 
 //? The plurificated interfaces of the models are probably useless AAAND anoying
