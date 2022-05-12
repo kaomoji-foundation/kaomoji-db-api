@@ -47,7 +47,10 @@ const ErrPolicyCategoriesLength = "Error: ilegal Categories slice size"
 // Returns the public/viewable kaomoji info
 func (k Kaomoji) Minimal() KaomojiMinimal {
 	return KaomojiMinimal{
-		ID: k.ID,
+		ID:         k.ID,
+		String:     k.String,
+		Desciption: k.Desciption,
+		Categories: k.Categories,
 	}
 }
 
