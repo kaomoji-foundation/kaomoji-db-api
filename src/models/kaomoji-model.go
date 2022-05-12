@@ -213,8 +213,9 @@ func (k Kaomoji) GetSimilar(keysThreshold int, stringFuzyness int) ([]KaomojiMin
 	return res, nil
 }
 
+//? should asume s1 is sorted and use binary search instead?
 /*
-Returns the amount of matched items in the two string slices
+Returns the amount of matched items in the two string slices in O(n1+n2)
 */
 func matchedStringSlice(s1, s2 []string) int {
 	count := 0
