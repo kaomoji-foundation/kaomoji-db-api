@@ -1,8 +1,10 @@
 package loaders
 
 import (
+	"GO-API-template/src/config"
 	"GO-API-template/src/middlewares"
 	"GO-API-template/src/routes"
+	"time"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -26,8 +28,8 @@ func LoadFiber() *fiber.App {
 	app.Use(logger.New())
 	// limmit to 5 requests per 10 seconds max
 	app.Use(limiter.New(limiter.Config{
-		Expiration: 30,
-		Max:        20,
+		Expiration: time.Duration(config.Config.Service.LimitorTimeFrame * int(time.Second)),
+		Max:        config.Config.Service.LimitorLimit,
 	}))
 	//* here you mount the routes for the apps in a certain bas path like: /api/alpha
 	router := app.Group("/alpha") // this is the base route for all endpoints
