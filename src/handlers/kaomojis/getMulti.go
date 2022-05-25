@@ -67,23 +67,26 @@ func GetKaomojis(c *fiber.Ctx) error {
 
 	var kaomojis []models.KaomojiMinimal
 	type searchRessults struct {
-		data         *[]models.KaomojiMinimal
-		resultRating []int // represents the amount of coincidences within the kaomoji usefull for later sorting
+		// Represents the amount of coincidences within the kaomoji usefull for later sorting
+		// The lower index of data the better the result is
+		// data[0][n] is a better result than data[1][n]
+		data [][]models.KaomojiMinimal
 	}
 
-	// total of unfiltered documents, 0 if filtering
+	// total of unfiltered documents //// 0 if filtering
 	total := int64(0)
 	kaoRange := limmit - offset
+
+	query.Filter = strings.TrimSpace(query.Filter)
 
 	if query.Filter == "" {
 		err = cursor.All(context.Background(), &kaomojis)
 	} else {
 		r := searchRessults{
-			data:         &kaomojis,
-			resultRating: make([]int, 0, len(kaomojis)),
+			data: make([][]models.KaomojiMinimal, 3), // [0:[], 1:[], 2:[]]
 		}
 		// processes every kaomoji, but only adds to kaomjis if still in range
-		for cursor.Next(context.Background()) {
+		for i := 0; cursor.Next(context.Background()); i++ {
 			var k models.KaomojiMinimal
 			if err = cursor.Decode(&k); err != nil {
 				c.Status(fiber.StatusInternalServerError).JSON(
@@ -92,29 +95,38 @@ func GetKaomojis(c *fiber.Ctx) error {
 			}
 
 			// data optimization for search
-			var cat = make([]string, 0, len(k.Categories))
-			for i := 0; i < len(k.Categories); i++ {
-				c := k.Categories[i]
+			var categories = make([]string, 0, len(k.Categories))
+			for _, c := range k.Categories {
 				if subCat := strings.Split(c, " "); len(subCat) > 1 {
-					for i := 0; i < len(subCat); i++ {
-						cat = append(cat, subCat[i])
+					for _, sc := range subCat {
+						categories = append(categories, sc)
 					}
 				}
-				cat = append(cat, c)
+				categories = append(categories, c)
 			}
+			filters := strings.Split(query.Filter, " ")
 
-			// filtered Categories
-			fcat := filtering.SearchString(cat, query.Filter)
+			// filter valid Categories for the given filters (taken from spliting query.filter)
+			filteredCategories, distances := filtering.SearchStrings(categories, filters, 2)
 
 			// ckecks k is a valid result and not out of range for this request
-			if len(fcat) > 0 && len(kaomojis) <= kaoRange {
-				r.resultRating = append(r.resultRating, len(fcat))
-				//kaomojis[len(kaomojis)] = k
-				*r.data = append(*r.data, k)
+			if len(filteredCategories) > 0 && len(kaomojis) <= kaoRange {
+				totalDist := 0
+				for _, distance := range distances {
+					totalDist += distance
+				}
+				averageDistance := totalDist / len(distances)
+
+				r.data[averageDistance] = append(r.data[averageDistance], k)
 			}
-			if len(fcat) > 0 {
+			if len(filteredCategories) > 0 {
 				total++
 			}
+		}
+
+		// append the ranked results from best to worst
+		for _, d := range r.data {
+			kaomojis = append(kaomojis, d...)
 		}
 	}
 
