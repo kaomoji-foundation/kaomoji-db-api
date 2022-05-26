@@ -111,6 +111,22 @@ components:
         name:
           type: string
           description: this will only be used for contacting
+    kaomoji:
+      type: object
+      required:
+        - string
+        - categories
+      properties:
+        string:
+          type: string
+          description: the kaomoji in string form
+        description:
+          type: string
+          description: Short description, mainly used by reviewers, this is kept as a record
+        categories:
+          type: Array<string>
+          description: categories to assign to the kaomoji, this is mainly used for searching
+
     error:
       type: object
       properties:
@@ -130,10 +146,20 @@ paths:
     get:
       summary: API docs
       description: get theese API docs, in yaml, or view them using redoc in /docs/spec.html
-      consumes:
-      - application/json
-      produces:
-      - application/json
+      consumes:required:
+        - string
+        - categories
+      properties:
+        string:
+          type: string
+          description: the kaomoji in string form
+        description:
+          type: string
+          description: Short description, mainly used by reviewers, this is kept as a record
+        categories:
+          type: Array<string>
+          description: categories to assign to the kaomoji, this is mainly used for searching
+
       responses:
         "200":
           description: OK
@@ -354,6 +380,7 @@ paths:
       security:
       - bearer: []
       summary: update user
+
     delete:
       summary: Delete user
       description: delete user completely
@@ -368,6 +395,172 @@ paths:
           description: OK
           schema:
             type: object
+        "401":
+          $ref: "#/components/responses/401"
+        "422":
+          $ref: "#/components/responses/422"
+        "500":
+          $ref: "#/components/responses/500"
+
+      security:
+        - bearer: []
+
+  /kaomojis/:
+    post:
+      summary: Add new kaomoji
+      description: add a new kaomoji
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/kaomoji"
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "401":
+          $ref: "#/components/responses/401"
+        "422":
+          $ref: "#/components/responses/422"
+        "500":
+          $ref: "#/components/responses/500"
+      security:
+        - bearer: []
+    get:
+      summary: list/search kaomojis
+      description: Get kaomojis data
+      parameters:
+        - name: o
+          description: Ressults Offset
+          in: query
+          required: false
+          allowEmptyValue: true
+          example: '0'
+          schema:
+            o: 
+              type: number
+              default: '0'
+        - name: l
+          description: Ressults Limmit
+          in: query
+          required: false
+          allowEmptyValue: true
+          example: 10
+          schema:
+            o: 
+              type: number
+              default: 10
+        - name: query
+          description: Query to search by
+          in: query
+          required: false
+          allowEmptyValue: true
+          example: 10
+          schema:
+            o: 
+              type: string
+              default: 
+        - name: scope
+          description: Comma separated scopes to search by
+          in: query
+          required: false
+          allowEmptyValue: true
+          example: categories
+          schema:
+            o: 
+              type: string
+              default: categories
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+        "401":
+          $ref: "#/components/responses/401"
+        "404":
+          $ref: "#/components/responses/404"
+        "500":
+          $ref: "#/components/responses/500"
+
+  /kaomojis/{kid}:
+    get:
+      summary: Retrieve single kaomoji
+      description: 
+        This will return all the data about a single kaomoji, including its revisions
+      consumes:
+      - application/json
+      parameters:
+      - description: kid kaomoji id string, 0
+        schema: string
+        in: path
+        name: kid
+        required: true
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/components/schemas/kaomoji"
+        "401":
+          $ref: "#/components/responses/401"
+        "404":
+          $ref: "#/components/responses/404"
+        "500":
+          $ref: "#/components/responses/500"
+    patch:
+      summary: update kaomoji
+      description: Update kaomoji data
+      consumes:
+      - application/json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/kaomoji"
+      parameters:
+      - $ref: "#/components/parameters/uid"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+              $ref: "#/components/schemas/kaomoji"
+        "401":
+          $ref: "#/components/responses/401"
+        "422":
+          $ref: "#/components/responses/422"
+        "404":
+          $ref: "#/components/responses/404"
+        "500":
+          $ref: "#/components/responses/500"
+
+      security:
+      - bearer: []
+    delete:
+      summary: Delete kaomoji
+      description: delete user completely
+      consumes:
+      - application/json
+      parameters:
+      - $ref: "#/components/parameters/uid"
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+              $ref: "#/components/schemas/kaomoji"
         "401":
           $ref: "#/components/responses/401"
         "422":
