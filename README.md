@@ -1,83 +1,9 @@
-# Go API template
-## Using/implementing
-<details>
- <summary>Click to expand!</summary>
- - **Fiber**    
-    > For performant routing and many other things
- - **JWT**      
-    > For user authentication
- - **MongoDB**  
-    > As the main database
- - **OpenTelemetry & LightStep**  
-    > For Deployment telemetry
- - **Redoc standalone** 
-    > For Technical documentation deployment
- - **godotenv** 
-    > For local development
-</details>
+# Kaomoji-DB API
 
-## Introduction/vision:
 
-Fiber is a quickly growing super-fast backend framework, mainly written in golang with performance in mind. 
 
-The intent of this repo is to create a **performant, comprenhensible, mantainable and production ready template** with nothing in it but the basics, so you do not have to spend time removing code or strugeling to understand any complicated code structure
-
-The only thing it handles by default is a sesion management system.
-
-## Future features:
-<details>
- <summary>Click to expand!</summary>
-   ### Nothing to see here yet  :(
-</details>
-
-## Project Structure:
-<details>
- <summary>Click to expand!</summary>
-
-```
-.
-├── src/
-│   ├── config/
-│   │   └── config.go
-│   ├── handlers/
-│   │   └── users/
-│   │       ├── auth.go
-│   │       └── user.go
-│   ├── helpers/
-│   │   └── .
-│   ├── loaders/
-│   │   ├── fiber.go
-│   │   └── mongo.go
-│   ├── middlewares/
-│   │   └── auth.go
-│   ├── models/
-│   │   └── user-model.go
-│   ├── routes/
-│   │   ├── appRouter.go
-│   │   ├── auth.go
-│   │   └── users.go
-│   ├── services/
-│   │   └── mongo.go
-│   ├── utils/
-│   │   └── .
-│   └── main.go
-├── .env
-├── app.go
-├── go.mod
-├── go.sum
-├── README.md
-└── sample.env
-```
-</details>
-
-I wanted to contain all the source code under a sub folder, so I only use app.go to execute a Start() function in src/main.go
-
-# API documentation
-   currently swaggest/swag cli **was** being used to generate the docs from the decalrative comments, this is no longer the case.
-   **Currently using manualy crafted documents**
-   > Why not use swaggest/swag cli?: it does not support OAS3
-
-   To serve theese docs a **Redoc** static file is being used, note that internet connection is required as jdelivr is being used for dependencies.
+## Roadmap
+[click here to go to our roadmap on notion](https://www.notion.so/e26a4d6dd97e43a6b9dbbd4ab7fc3286?v=1e7f819138974a12af5f5795df81f3d6)
 
 ## Setup:
 <details>
@@ -217,7 +143,5 @@ You will need a mongoDB database, with atleast
 
 </details>
 
-
-## About:
-
-If this repository is/was useful to you in any way, please star this repository and share it with people who may be interested. I'll do my best to keep it updated.
+## Contributing
+If you wannt to contibute to the kaomoji-db api, please read the [contributing gidelines](https://soft-secure-9ad.notion.site/Development-Gidelines-c6dafc076cd443d29e547255c5e42bd9)
