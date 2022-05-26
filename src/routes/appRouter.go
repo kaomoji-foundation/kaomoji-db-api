@@ -16,7 +16,6 @@ func SetupRoutes(api *fiber.Router) {
 	UsersRoute(api) // >> /users
 	AuthRoute(api)  // >> /auth
 
-	PingRoute(api)     // >> /ping
 	KaomojisRoute(api) // >> /kaomoji
 
 }

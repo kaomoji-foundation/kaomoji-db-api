@@ -166,24 +166,6 @@ paths:
           schema:
             type: string
 
-  /ping:
-    get:
-      summary: Ping
-      description: Check api is active
-      consumes:
-      - application/json
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: string
-        "401":
-          $ref: "#/components/responses/401"
-      security:
-        - bearer: []      
-
   /auth/login/{uid}:
     get:
       summary: Login, Get bearer token
