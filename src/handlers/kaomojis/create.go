@@ -1,9 +1,9 @@
 package kaomojis
 
 import (
-	stdMsg "GO-API-template/src/helpers/stdMessages"
-	"GO-API-template/src/models"
-	"GO-API-template/src/utils/radix"
+	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
+	"Kaomoji-DB/src/models"
+	"Kaomoji-DB/src/utils/radix"
 	"context"
 
 	"github.com/gofiber/fiber/v2"

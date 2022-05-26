@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"GO-API-template/src"
+	"Kaomoji-DB/src"
 )
 
 func main() {

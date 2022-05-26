@@ -1,10 +1,10 @@
 package auth
 
 import (
-	cfg "GO-API-template/src/config"
-	stdMsg "GO-API-template/src/helpers/stdMessages"
-	"GO-API-template/src/models"
-	"GO-API-template/src/utils"
+	cfg "Kaomoji-DB/src/config"
+	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
+	"Kaomoji-DB/src/models"
+	"Kaomoji-DB/src/utils"
 	"context"
 	"time"
 

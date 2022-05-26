@@ -1,4 +1,4 @@
-module GO-API-template
+module Kaomoji-DB
 
 // +heroku goVersion 1.18
 go 1.18

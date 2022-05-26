@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"time"
 
-	"GO-API-template/src/services"
+	"Kaomoji-DB/src/services"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

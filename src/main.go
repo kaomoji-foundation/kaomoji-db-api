@@ -1,8 +1,8 @@
 package src
 
 import (
-	cfg "GO-API-template/src/config"
-	"GO-API-template/src/loaders"
+	cfg "Kaomoji-DB/src/config"
+	"Kaomoji-DB/src/loaders"
 
 	"github.com/lightstep/otel-launcher-go/launcher"
 )
@@ -30,7 +30,7 @@ func Start() {
 	//Open Telemetry setup (optional)
 	if cfg.Config.OpenTel.LightStepKey != "" {
 		ls := launcher.ConfigureOpentelemetry(
-			launcher.WithServiceName("Go-API-Template"),
+			launcher.WithServiceName("kaomoji-db"),
 			launcher.WithAccessToken(cfg.Config.OpenTel.LightStepKey),
 		)
 		defer ls.Shutdown()

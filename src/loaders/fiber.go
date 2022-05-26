@@ -1,9 +1,9 @@
 package loaders
 
 import (
-	"GO-API-template/src/config"
-	"GO-API-template/src/middlewares"
-	"GO-API-template/src/routes"
+	"Kaomoji-DB/src/config"
+	"Kaomoji-DB/src/middlewares"
+	"Kaomoji-DB/src/routes"
 	"time"
 
 	"github.com/gofiber/fiber/v2"

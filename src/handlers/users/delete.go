@@ -1,7 +1,7 @@
 package users
 
 import (
-	"GO-API-template/src/models"
+	"Kaomoji-DB/src/models"
 	"context"
 	"fmt"
 

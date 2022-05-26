@@ -5,8 +5,8 @@ import (
 	"errors"
 	"log"
 
-	"GO-API-template/src/services"
-	"GO-API-template/src/utils/radix"
+	"Kaomoji-DB/src/services"
+	"Kaomoji-DB/src/utils/radix"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

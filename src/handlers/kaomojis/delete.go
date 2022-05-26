@@ -1,8 +1,8 @@
 package kaomojis
 
 import (
-	stdMsg "GO-API-template/src/helpers/stdMessages"
-	"GO-API-template/src/models"
+	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
+	"Kaomoji-DB/src/models"
 	"context"
 	"fmt"
 

@@ -1,10 +1,10 @@
 package kaomojis
 
 import (
-	hh "GO-API-template/src/helpers/handlersHelpers"
-	stdMsg "GO-API-template/src/helpers/stdMessages"
-	"GO-API-template/src/models"
-	"GO-API-template/src/utils/filtering"
+	hh "Kaomoji-DB/src/helpers/handlersHelpers"
+	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
+	"Kaomoji-DB/src/models"
+	"Kaomoji-DB/src/utils/filtering"
 	"context"
 	"fmt"
 	"strings"

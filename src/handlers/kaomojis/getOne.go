@@ -1,7 +1,7 @@
 package kaomojis
 
 import (
-	"GO-API-template/src/models"
+	"Kaomoji-DB/src/models"
 
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/mongo"

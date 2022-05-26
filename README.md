@@ -206,7 +206,7 @@ You will need a mongoDB database, with atleast
    ```go
    //Open Telemetry setup
 	ls := launcher.ConfigureOpentelemetry(
-		launcher.WithServiceName("Go-API-Template"),
+		launcher.WithServiceName("kaomoji-db"),
 		launcher.WithAccessToken(cfg.Config.OpenTel.LightStepKey),
 	)
 	defer ls.Shutdown()

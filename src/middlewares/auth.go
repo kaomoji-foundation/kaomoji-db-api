@@ -1,9 +1,9 @@
 package middlewares
 
 import (
-	cfg "GO-API-template/src/config"
-	stdMsg "GO-API-template/src/helpers/stdMessages"
-	"GO-API-template/src/models"
+	cfg "Kaomoji-DB/src/config"
+	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
+	"Kaomoji-DB/src/models"
 	"fmt"
 
 	"github.com/gofiber/fiber/v2"

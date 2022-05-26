@@ -3,7 +3,7 @@ package auth
 // Common specific stuff for /auth operations goes here! UwU
 
 import (
-	stdMsg "GO-API-template/src/helpers/stdMessages"
+	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
 
 	"github.com/gofiber/fiber/v2"
 )

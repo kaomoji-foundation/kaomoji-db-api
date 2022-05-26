@@ -1,9 +1,9 @@
 package users
 
 import (
-	stdMsg "GO-API-template/src/helpers/stdMessages"
-	"GO-API-template/src/models"
-	"GO-API-template/src/utils"
+	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
+	"Kaomoji-DB/src/models"
+	"Kaomoji-DB/src/utils"
 	"context"
 
 	"github.com/gofiber/fiber/v2"
