@@ -6,7 +6,7 @@ name: Run CI
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dockerization" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -26,7 +26,7 @@ jobs:
           go-version: 1.16.4
 
       - name: Checkout code
-        uses: actions/checkout@c
+        uses: actions/checkout@v3
 
       - name: Fetch required Go modules
         run:  go mod download
