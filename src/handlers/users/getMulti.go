@@ -1,10 +1,10 @@
 package users
 
 import (
-	"Kaomoji-DB/src/helpers/stdMessages"
-	"Kaomoji-DB/src/models"
 	"context"
 	"fmt"
+	"kaomojidb/src/helpers/stdMessages"
+	"kaomojidb/src/models"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"

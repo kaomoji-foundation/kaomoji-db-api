@@ -1,9 +1,9 @@
 package users
 
 import (
-	"Kaomoji-DB/src/models"
 	"context"
 	"fmt"
+	"kaomojidb/src/models"
 
 	"github.com/gofiber/fiber/v2"
 	jwt "github.com/golang-jwt/jwt/v4"

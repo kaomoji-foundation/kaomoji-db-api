@@ -1,12 +1,12 @@
 package kaomojis
 
 import (
-	hh "Kaomoji-DB/src/helpers/handlersHelpers"
-	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
-	"Kaomoji-DB/src/models"
-	"Kaomoji-DB/src/utils/filtering"
 	"context"
 	"fmt"
+	hh "kaomojidb/src/helpers/handlersHelpers"
+	stdMsg "kaomojidb/src/helpers/stdMessages"
+	"kaomojidb/src/models"
+	"kaomojidb/src/utils/filtering"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"

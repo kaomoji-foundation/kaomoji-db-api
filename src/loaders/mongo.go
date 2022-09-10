@@ -3,8 +3,8 @@ package loaders
 import (
 	"context"
 
-	"Kaomoji-DB/src/models"
-	"Kaomoji-DB/src/services"
+	"kaomojidb/src/models"
+	"kaomojidb/src/services"
 )
 
 func LoadMongo() *context.CancelFunc {

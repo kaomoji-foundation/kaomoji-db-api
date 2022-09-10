@@ -1,7 +1,7 @@
 package handlershelpers
 
 import (
-	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
+	stdMsg "kaomojidb/src/helpers/stdMessages"
 	"strconv"
 
 	"github.com/gofiber/fiber/v2"

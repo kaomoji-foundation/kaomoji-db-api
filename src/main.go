@@ -1,8 +1,8 @@
 package src
 
 import (
-	cfg "Kaomoji-DB/src/config"
-	"Kaomoji-DB/src/loaders"
+	cfg "kaomojidb/src/config"
+	"kaomojidb/src/loaders"
 
 	"github.com/lightstep/otel-launcher-go/launcher"
 )

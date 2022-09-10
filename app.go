@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"Kaomoji-DB/src"
+	"kaomojidb/src"
 )
 
 func main() {

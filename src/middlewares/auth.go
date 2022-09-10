@@ -1,10 +1,10 @@
 package middlewares
 
 import (
-	cfg "Kaomoji-DB/src/config"
-	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
-	"Kaomoji-DB/src/models"
 	"fmt"
+	cfg "kaomojidb/src/config"
+	stdMsg "kaomojidb/src/helpers/stdMessages"
+	"kaomojidb/src/models"
 
 	"github.com/gofiber/fiber/v2"
 	jwtware "github.com/gofiber/jwt/v2"

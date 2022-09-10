@@ -1,5 +1,5 @@
 .env
 .vscode
 vendor
-Kaomoji-DB
+kaomojidb
 kaomoji-db-api

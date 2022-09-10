@@ -1,11 +1,11 @@
 package auth
 
 import (
-	cfg "Kaomoji-DB/src/config"
-	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
-	"Kaomoji-DB/src/models"
-	"Kaomoji-DB/src/utils"
 	"context"
+	cfg "kaomojidb/src/config"
+	stdMsg "kaomojidb/src/helpers/stdMessages"
+	"kaomojidb/src/models"
+	"kaomojidb/src/utils"
 	"time"
 
 	"github.com/gofiber/fiber/v2"

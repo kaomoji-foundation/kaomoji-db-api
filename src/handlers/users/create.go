@@ -1,9 +1,9 @@
 package users
 
 import (
-	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
-	"Kaomoji-DB/src/models"
-	"Kaomoji-DB/src/utils"
+	stdMsg "kaomojidb/src/helpers/stdMessages"
+	"kaomojidb/src/models"
+	"kaomojidb/src/utils"
 
 	"github.com/gofiber/fiber/v2"
 	"go.mongodb.org/mongo-driver/bson/primitive"

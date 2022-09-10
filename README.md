@@ -1,4 +1,4 @@
-# Kaomoji-DB API
+# kaomojidb API
 
 
 

@@ -5,8 +5,8 @@ import (
 	"errors"
 	"log"
 
-	"Kaomoji-DB/src/services"
-	"Kaomoji-DB/src/utils/radix"
+	"kaomojidb/src/services"
+	"kaomojidb/src/utils/radix"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

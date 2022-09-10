@@ -1,9 +1,9 @@
 package loaders
 
 import (
-	"Kaomoji-DB/src/config"
-	"Kaomoji-DB/src/middlewares"
-	"Kaomoji-DB/src/routes"
+	"kaomojidb/src/config"
+	"kaomojidb/src/middlewares"
+	"kaomojidb/src/routes"
 	"time"
 
 	"github.com/gofiber/fiber/v2"

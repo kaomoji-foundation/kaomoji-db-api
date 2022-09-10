@@ -1,10 +1,10 @@
 package users
 
 import (
-	stdMsg "Kaomoji-DB/src/helpers/stdMessages"
-	"Kaomoji-DB/src/models"
-	"Kaomoji-DB/src/utils"
 	"context"
+	stdMsg "kaomojidb/src/helpers/stdMessages"
+	"kaomojidb/src/models"
+	"kaomojidb/src/utils"
 
 	"github.com/gofiber/fiber/v2"
 	jwt "github.com/golang-jwt/jwt/v4"

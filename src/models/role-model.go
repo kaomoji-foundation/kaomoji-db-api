@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"Kaomoji-DB/src/services"
+	"kaomojidb/src/services"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"

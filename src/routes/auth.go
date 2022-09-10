@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"Kaomoji-DB/src/handlers/auth"
-	"Kaomoji-DB/src/middlewares"
+	"kaomojidb/src/handlers/auth"
+	"kaomojidb/src/middlewares"
 
 	"github.com/gofiber/fiber/v2"
 )

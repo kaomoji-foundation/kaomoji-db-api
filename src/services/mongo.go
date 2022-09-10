@@ -5,7 +5,7 @@ import (
 	"log"
 	"time"
 
-	cfg "Kaomoji-DB/src/config"
+	cfg "kaomojidb/src/config"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
