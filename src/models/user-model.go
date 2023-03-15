@@ -3,9 +3,12 @@ package models
 import (
 	"context"
 	"log"
+	"time"
 
+	"kaomojidb/src/config"
 	"kaomojidb/src/services"
 
+	jwt "github.com/golang-jwt/jwt/v4"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -26,7 +29,7 @@ type User struct {
 	BlockedTokens map[string]bool `bson:"blockedTokens" json:"blockedTokens"`
 }
 
-//? The plurificated interfaces of the models are probably useless AAAND anoying
+// ? The plurificated interfaces of the models are probably useless AAAND anoying
 type Users interface {
 	Create() *mongo.InsertOneResult
 	ReadAll() []User
@@ -214,7 +217,7 @@ func (u *User) SetRole() error {
 	return err
 }
 
-//* Requires to have a well formed ID
+// * Requires to have a well formed ID
 func (u *User) LoadTokens() error {
 
 	res := UsersCollection.FindOne(
@@ -231,12 +234,46 @@ func (u *User) LoadTokens() error {
 	return err // returns nil or the last error
 }
 
-//* Requires to have a well formed ID
-func (u *User) PruneToken() {
-
+// * Requires to be filled first
+func (u *User) PruneTokens() {
+	tokenLists := []map[string]bool{u.BlockedTokens, u.Tokens}
+	for _, list := range tokenLists {
+		go pruneTokenList(list)
+	}
 }
 
-//* Requires to have a well formed ID
+// checks if the tokens in a list are expired and deletes them in that case.
+func pruneTokenList(list map[string]bool) {
+
+	for token := range list {
+		//set up function to call asyncronously
+		pruneFromList := func(tok string) {
+			token, expired := tokenIsExpired(tok)
+			if expired {
+				delete(list, token)
+			}
+		}
+		go pruneFromList(token)
+	}
+}
+
+// Checks if the token is expired
+func tokenIsExpired(token string) (string, bool) {
+	tok, _ := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+		return []byte(config.Config.JWT.Secret), nil
+	})
+
+	// check if the token has expired
+	if claims, ok := tok.Claims.(jwt.MapClaims); ok && tok.Valid {
+		expirationTime := time.Unix(int64(claims["exp"].(float64)), 0)
+		if time.Now().After(expirationTime) {
+			return token, true
+		}
+	}
+	return "", false
+}
+
+// * Requires to have a well formed ID
 func (u *User) BlockToken() {
 
 }
