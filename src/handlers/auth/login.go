@@ -78,6 +78,9 @@ func Login(c *fiber.Ctx) error {
 	}
 	userData.Tokens[t] = true
 
+	// prune expired tokens
+	go userData.PruneTokens()
+
 	filter := bson.M{"_id": userData.ID}
 	update := bson.M{"$set": userData}
 	_, err = models.UsersCollection.UpdateOne(context.Background(), filter, update)
