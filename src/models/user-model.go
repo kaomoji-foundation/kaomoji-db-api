@@ -3,6 +3,7 @@ package models
 import (
 	"context"
 	"log"
+	"sync"
 	"time"
 
 	"kaomojidb/src/config"
@@ -58,6 +59,17 @@ type userPrivate struct {
 	Name     string             `bson:"name" json:"name"`
 	Role     string             `bson:"role" json:"role"`
 	//RoleID   primitive.ObjectID `bson:"roleID" json:"roleID"`
+	// Tokens list is only used to be able to block the token later by placing said token onto the BlockedTokens list
+	Tokens map[string]bool `bson:"tokens" json:"tokens"`
+	// Any attempt to use the tokens stored here, will be blocked
+	BlockedTokens map[string]bool `bson:"blockedTokens" json:"blockedTokens"`
+}
+
+/*
+User tokens struct, only used for token pruning
+this is to avoid a race condition with the rest of the data set for the user
+*/
+type userTokens struct {
 	// Tokens list is only used to be able to block the token later by placing said token onto the BlockedTokens list
 	Tokens map[string]bool `bson:"tokens" json:"tokens"`
 	// Any attempt to use the tokens stored here, will be blocked
@@ -234,26 +246,46 @@ func (u *User) LoadTokens() error {
 	return err // returns nil or the last error
 }
 
-// * Requires to be filled first
+// * Requires data to be filled first, will push to database.
 func (u *User) PruneTokens() {
+	var wg sync.WaitGroup
 	tokenLists := []map[string]bool{u.BlockedTokens, u.Tokens}
 	for _, list := range tokenLists {
-		go pruneTokenList(list)
+		wg.Add(1)
+		go pruneTokenList(list, &wg)
 	}
+	wg.Wait()
+	// update the tokens lists on the db
+	var userTokens userTokens
+	userTokens.BlockedTokens = u.BlockedTokens
+	userTokens.Tokens = u.Tokens
+
+	filter := bson.M{"_id": u.ID}
+	update := bson.M{"$set": userTokens}
+	_, err = UsersCollection.UpdateOne(context.Background(), filter, update)
 }
 
 // checks if the tokens in a list are expired and deletes them in that case.
-func pruneTokenList(list map[string]bool) {
+func pruneTokenList(list map[string]bool, callerWGs ...*sync.WaitGroup) {
 
+	var wg sync.WaitGroup
 	for token := range list {
 		//set up function to call asyncronously
-		pruneFromList := func(tok string) {
+		pruneFromList := func(tok string, wg *sync.WaitGroup) {
 			token, expired := tokenIsExpired(tok)
 			if expired {
 				delete(list, token)
 			}
+			wg.Done()
 		}
-		go pruneFromList(token)
+		wg.Add(1)
+		go pruneFromList(token, &wg)
+	}
+
+	wg.Wait()
+	if len(callerWGs) == 1 {
+		// release one from the wait group of the caller function
+		callerWGs[0].Done()
 	}
 }
 
