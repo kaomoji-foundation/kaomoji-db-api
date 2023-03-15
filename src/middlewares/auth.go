@@ -71,7 +71,6 @@ func jwtError(c *fiber.Ctx, err error) error {
 		JSON(stdMsg.ErrorDefault("Invalid or expired JWT", nil))
 }
 
-// ckecks a token to be valid against it's user, if not inform of it and continue
 func jwtInvalid(c *fiber.Ctx, err error) error {
 	c.Locals("Authenticated", false)
 	const ErrJWTMissingOrMalformed = "Missing or malformed JWT"
