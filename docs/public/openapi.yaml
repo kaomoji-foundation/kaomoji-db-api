@@ -221,6 +221,39 @@ paths:
       security:
         - bearer: []
 
+  /auth/drop:
+    get:
+      summary: drops (logout) bearer token
+      description: Blocks a given token, if none is provided, the one used to acess this route willbe blocked.
+      requestBody:
+        description: token json field
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  description: user's token to be blocked
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/components/schemas/token.response"
+        "400":
+          $ref: "#/components/responses/400"
+        "401":
+          $ref: "#/components/responses/401"
+        "500":
+          $ref: "#/components/responses/500"
+      security:
+        - bearer: []
+
+
   /users/:
     post:
       summary: Register new user
