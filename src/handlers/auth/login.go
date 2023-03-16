@@ -37,7 +37,7 @@ func Login(c *fiber.Ctx) error {
 			"message": "Error on login request",
 			"data":    err,
 			"expected": fiber.Map{
-				"identity": "username or password",
+				"identity": "username or email",
 				"password": "user password",
 			},
 		})
