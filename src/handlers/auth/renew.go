@@ -71,5 +71,5 @@ func Renew(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(stdMsg.ErrorDefault("An error ocurred while procesing the request", err))
 	}
 
-	return c.JSON(fiber.Map{"status": "success", "message": "Login sucessful", "token": t})
+	return c.JSON(fiber.Map{"status": "success", "message": "Sucessful Token Renew", "token": t})
 }
