@@ -29,15 +29,18 @@ func Drop(c *fiber.Ctx) error {
 
 	var userData models.User
 
-	if err := c.BodyParser(&reqBody); err != nil {
-		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"status":  "error",
-			"message": "Error on drop request",
-			"data":    err,
-			"expected": fiber.Map{
-				"token": "JWT bearer token",
-			},
-		})
+	if len(c.Body()) != 0 { //empty body
+		if err := c.BodyParser(&reqBody); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"status":  "error",
+				"message": "Error on drop request",
+				"data":    err,
+				"expected": fiber.Map{
+					"token": "JWT bearer token",
+				},
+			})
+		}
+		reqBody.Token = ""
 	}
 
 	// Token of the user
@@ -86,5 +89,5 @@ func Drop(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusInternalServerError).JSON(stdMsg.ErrorDefault("An error ocurred while procesing the request", err))
 	}
 
-	return c.JSON(fiber.Map{"status": "success", "message": "token dropped sucessfully", "token": token.Raw})
+	return c.JSON(fiber.Map{"status": "success", "message": "token dropped sucessfully", "token": tokenStr})
 }
