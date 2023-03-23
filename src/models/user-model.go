@@ -263,7 +263,7 @@ func (u *User) PruneTokens() {
 	filter := bson.M{"_id": u.ID}
 	update := bson.M{"$set": userTokens}
 	_, err := UsersCollection.UpdateOne(context.Background(), filter, update)
-	log.Print(err.Error())
+	log.Println(err.Error())
 }
 
 // checks if the tokens in a list are expired and deletes them in that case.
