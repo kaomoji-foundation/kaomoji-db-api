@@ -4,7 +4,6 @@ import (
 	"context"
 	"log"
 	"sync"
-	"time"
 
 	"kaomojidb/src/config"
 	"kaomojidb/src/services"
@@ -249,7 +248,7 @@ func (u *User) LoadTokens() error {
 // * Requires data to be filled first, will push to database.
 func (u *User) PruneTokens() {
 	var wg sync.WaitGroup
-	tokenLists := []map[string]bool{u.BlockedTokens, u.Tokens}
+	tokenLists := []*map[string]bool{&u.BlockedTokens, &u.Tokens}
 	for _, list := range tokenLists {
 		wg.Add(1)
 		go pruneTokenList(list, &wg)
@@ -263,19 +262,25 @@ func (u *User) PruneTokens() {
 	filter := bson.M{"_id": u.ID}
 	update := bson.M{"$set": userTokens}
 	_, err := UsersCollection.UpdateOne(context.Background(), filter, update)
-	log.Println(err.Error())
+	if err != nil {
+		log.Println("[TokenPruneRoutine]:" + err.Error())
+	} else {
+		log.Println("[TokenPruneRoutine]: Finished single user routine sucessfully")
+	}
 }
 
 // checks if the tokens in a list are expired and deletes them in that case.
-func pruneTokenList(list map[string]bool, callerWGs ...*sync.WaitGroup) {
+func pruneTokenList(list *map[string]bool, callerWGs ...*sync.WaitGroup) {
 
 	var wg sync.WaitGroup
-	for token := range list {
+	for token := range *list {
 		//set up function to call asyncronously
-		pruneFromList := func(tok string, wg *sync.WaitGroup) {
-			token, expired := tokenIsExpired(tok)
+		pruneFromList := func(token string, wg *sync.WaitGroup) {
+			_, expired := tokenIsExpired(token)
 			if expired {
-				delete(list, token)
+				//log.Println("[TokenPruneRoutine]: Found expired token: ")
+				delete(*list, token)
+				log.Printf("[TokenPruneRoutine]: %v", len(*list))
 			}
 			wg.Done()
 		}
@@ -291,19 +296,17 @@ func pruneTokenList(list map[string]bool, callerWGs ...*sync.WaitGroup) {
 }
 
 // Checks if the token is expired
-func tokenIsExpired(token string) (string, bool) {
+func tokenIsExpired(token string) (*jwt.Token, bool) {
 	tok, _ := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
 		return []byte(config.Config.JWT.Secret), nil
 	})
 
 	// check if the token has expired
-	if claims, ok := tok.Claims.(jwt.MapClaims); ok && tok.Valid {
-		expirationTime := time.Unix(int64(claims["exp"].(float64)), 0)
-		if time.Now().After(expirationTime) {
-			return token, true
-		}
+	if !tok.Valid {
+		return tok, true
 	}
-	return "", false
+
+	return tok, false
 }
 
 // * Requires to have a well formed ID
