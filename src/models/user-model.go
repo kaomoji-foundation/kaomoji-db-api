@@ -295,18 +295,14 @@ func pruneTokenList(list *map[string]bool, callerWGs ...*sync.WaitGroup) {
 	}
 }
 
-// Checks if the token is expired
+// Parses a token and checks if token is valid, retuns parsed Token and invalid tag
 func tokenIsExpired(token string) (*jwt.Token, bool) {
 	tok, _ := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
 		return []byte(config.Config.JWT.Secret), nil
 	})
 
 	// check if the token has expired
-	if !tok.Valid {
-		return tok, true
-	}
-
-	return tok, false
+	return tok, !tok.Valid
 }
 
 // * Requires to have a well formed ID
