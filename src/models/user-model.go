@@ -276,7 +276,7 @@ func pruneTokenList(list *map[string]bool, callerWGs ...*sync.WaitGroup) {
 	for token := range *list {
 		//set up function to call asyncronously
 		pruneFromList := func(token string, wg *sync.WaitGroup) {
-			_, expired := tokenIsExpired(token)
+			_, expired := tokenIsInvalid(token)
 			if expired {
 				//log.Println("[TokenPruneRoutine]: Found expired token: ")
 				delete(*list, token)
@@ -296,7 +296,7 @@ func pruneTokenList(list *map[string]bool, callerWGs ...*sync.WaitGroup) {
 }
 
 // Parses a token and checks if token is valid, retuns parsed Token and invalid tag
-func tokenIsExpired(token string) (*jwt.Token, bool) {
+func tokenIsInvalid(token string) (*jwt.Token, bool) {
 	tok, _ := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
 		return []byte(config.Config.JWT.Secret), nil
 	})
