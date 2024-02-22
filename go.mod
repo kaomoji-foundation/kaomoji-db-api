@@ -11,7 +11,7 @@ require (
 	github.com/psmarcin/fiber-opentelemetry v1.2.0
 	go.mongodb.org/mongo-driver v1.9.1
 	go.opentelemetry.io/otel/trace v1.7.0
-	golang.org/x/crypto v0.14.0
+	golang.org/x/crypto v0.17.0
 )
 
 require (
@@ -66,7 +66,7 @@ require (
 	golang.org/x/net v0.17.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/sys v0.15.0 // indirect
-	golang.org/x/text v0.13.0 // indirect
+	golang.org/x/text v0.14.0 // indirect
 	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 // indirect
 	google.golang.org/grpc v1.56.3 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
